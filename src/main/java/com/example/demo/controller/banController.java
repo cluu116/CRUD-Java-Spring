@@ -36,10 +36,27 @@ public class banController {
     public String formAdd() {
         return "formAdd";
     }
+    @RequestMapping(value = "/formUpdate")
+    public String formUpdate(HttpServletRequest req,@RequestParam("id") String id) {
+        Ban ban = respository.getOne(Integer.valueOf(id));
+        req.setAttribute("bans", ban);
+        return "formUpdate";
+    }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(@ModelAttribute Ban ban) {
         respository.add(ban);
+        return "redirect:/hien-thi";
+    }
+    @RequestMapping(value = "/sua", method = RequestMethod.POST)
+    public String sua(HttpServletRequest req) {
+        Ban ban = new Ban();
+        ban.setId(Integer.valueOf(req.getParameter("id")));
+        ban.setMa(req.getParameter("ma"));
+        ban.setTen(req.getParameter("ten"));
+        ban.setSoThich(req.getParameter("soThich"));
+        ban.setGioiTinh(Integer.valueOf(req.getParameter("gioiTinh")));
+        respository.update(ban);
         return "redirect:/hien-thi";
     }
 

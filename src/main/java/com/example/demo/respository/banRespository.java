@@ -29,6 +29,13 @@ public class banRespository {
         transaction.commit();
     }
 
+    public void update(Ban ban) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(ban);
+        transaction.commit();
+    }
+
     public void delete(Ban b) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
