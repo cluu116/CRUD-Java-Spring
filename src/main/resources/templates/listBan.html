@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h2 class="text text-center">Quản lý bạn bè</h2>
+    <a href="formAdd" class="btn btn-success mb-5">Add</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Mã</th>
+            <th>Tên</th>
+            <th>Sở thích</th>
+            <th>Giới tính c1</th>
+            <th>Giới tính c2</th>
+            <th>Giới tính c3</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ban,stt : ${bans}">
+            <th th:text="${stt.count}"></th>
+            <td th:text="${ban.ma}"></td>
+            <td th:text="${ban.ten}"></td>
+            <td th:text="${ban.soThich}"></td>
+            <td th:text="${ban.gioiTinh eq 0 ? 'Nam' : 'Nữ'}"></td>
+            <td th:switch="${ban.gioiTinh}">
+                <p th:case="0">Nam</p>
+                <p th:case="1">Nữ</p>
+                <p th:case="*">3D</p>
+            </td>
+            <td>
+                <p th:if="${ban.gioiTinh} eq 0">Nam</p>
+                <p th:if="${ban.gioiTinh} eq 1">Nữ</p>
+            </td>
+            <td>
+                <a th:href="@{'/xoa?id=' + ${ban.id}}" class="btn btn-danger">Xóa</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${trangMacDinh == 1 ? 'disabled' : ''}">
+            <a class="page-link" th:href="@{${'hien-thi' + '?trang=' + (trangMacDinh - 1)}}" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <th:block th:each="pageNumber : ${#numbers.sequence(1, tongTrang)}" th:with="pageValue=${'hien-thi' + '?trang=' + pageNumber}" class="page-item" th:classappend="${trangMacDinh == pageNumber ? 'active' : ''}">
+                <a class="page-link" th:href="@{${pageValue}}">[[${pageNumber}]]</a>
+            </th:block>
+            <li class="page-item" th:classappend="${trangMacDinh == tongTrang ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{${'hien-thi' + '?trang=' + (trangMacDinh + 1)}}">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>
