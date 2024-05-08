@@ -1,4 +1,4 @@
-* Cơ sở dữ liệu (Bắt buộc)
+# Cơ sở dữ liệu
 USE master
 GO
 CREATE DATABASE PTPM_FINALLY_JAVA_SOF3011
