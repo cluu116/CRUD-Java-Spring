@@ -1,2 +1,2 @@
-# Cơ sở dữ liệu
+# Cách hoạt động
 1: Thêm cơ sở dữ liệu (mysql)
