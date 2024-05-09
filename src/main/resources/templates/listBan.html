@@ -10,16 +10,16 @@
 <div class="container">
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand">Navbar</a>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <a class="navbar-brand" href="hien-thi">Trang chủ</a>
+            <form action="hien-thi" class="d-flex" method="get">
+                <input name="key" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" th:value="${param.key}">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
     </nav>
 
     <h2 class="text text-center">Quản lý bạn bè</h2>
-    <a href="formAdd" class="btn btn-success mb-5 mt-2">Add</a>
+    <a href="formAdd" class="btn btn-success mb-5 mt-2">Thêm mới</a>
     <table class="table">
         <thead>
         <tr>
@@ -50,7 +50,7 @@
                 <p th:if="${ban.gioiTinh} eq 1">Nữ</p>
             </td>
             <td>
-                <a th:href="@{'/xoa?id=' + ${ban.id}}" class="btn btn-danger">Xóa</a>
+                <a th:onclick="return confirm('Bạn chắc chắn muốn xóa không?')" th:href="@{'/xoa?id=' + ${ban.id}}" class="btn btn-danger">Xóa</a>
                 <a th:href="@{'/formUpdate?id=' + ${ban.id}}" class="btn btn-warning">Sửa</a>
             </td>
         </tr>

@@ -14,10 +14,15 @@ public class banController {
 
     @RequestMapping(value = "/hien-thi")
     public String show(HttpServletRequest request) {
-        List<Ban> bans = respository.getAll();
+        List<Ban> bans;
+        String key = request.getParameter("key");
         int soTrang = 5;
+        if (key == null || key.isEmpty()) {
+            bans = respository.getAll();
+        }else{
+            bans = respository.search(key);
+        }
         int tongTrang = (int) Math.ceil((double) bans.size() / soTrang);
-
         int trangMacDinh = 1;
         String trangHienTai = request.getParameter("trang");
         if (trangHienTai != null && !trangHienTai.isEmpty()) {
